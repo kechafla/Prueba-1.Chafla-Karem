@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Banco Bandido de Peluche</title>
+</head>
+<body>
+<h2>Formulario - Banco "Bandido de Peluche"</h2>
+
+<form th:action="@{/calcular}" th:object="${cliente}" method="post">
+    <label>Saldo Anterior:</label>
+    <input type="number" th:field="*{saldoAnterior}" required />
+
+    <label>Compras Realizadas:</label>
+    <input type="number" th:field="*{compras}" required />
+
+    <label>Pago Realizado:</label>
+    <input type="number" th:field="*{pago}" required />
+
+    <button type="submit">Calcular</button>
+</form>
+
+<div th:if="${cliente.saldoActual != null}" class="resultado">
+    <h3>Resultados del Cliente</h3>
+    <p><strong>Saldo Actual:</strong> <span th:text="${cliente.saldoActual}">0.0</span></p>
+    <p><strong>Pago Mínimo:</strong> <span th:text="${cliente.pagoMinimo}">0.0</span></p>
+    <p><strong>Pago para No Generar Intereses:</strong> <span th:text="${cliente.pagoNoIntereses}">0.0</span></p>
+    <p><strong>Interés Generado (por morosidad):</strong> <span th:text="${cliente.interesGenerado}">0.0</span></p>
+</div>
+</body>
+</html>
